@@ -1,28 +1,81 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      <input type="text" v-model="info">
+      <button @click="pushButtonClick">添加</button>
+      <button @click="deleteButtonClick">删除</button>
+      <button @click="resetButtonClick">重置</button>
+    </div>
+    <ul>
+      <ToDoItem v-for="item,index in todoList" :key="index" class="todo-item">
+
+        <!-- 命名插槽的使用语法 todo-item为插槽的name, 等号后面跟着是子组件传递出数据供父组件使用 -->
+        <template v-slot:todo-item="itemProps">
+          {{itemProps}}
+          <!-- 用对象形式写css -->
+          <span :style="{marginLeft: '15px', color: itemProps.isChecked ? 'red' : 'blue'}">{{item}}</span>
+        </template>
+      </ToDoItem>
+      
+      <!-- 会自动把驼峰命名法注册成横线隔开命名 -->
+      <!-- <to-do-item v-for="item,index in todoList" :key="index" :item="item"></to-do-item> -->
+
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ToDoItem from './components/ToDoItem'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ToDoItem,
+  },
+  data() {
+    return {
+      todoList: ['hello'],
+      info: ''
+    }
+  },
+  methods: {
+    pushButtonClick() {
+      // 如果this.info为空则不添加
+      if (this.info) {
+        // 将input框中的信息添加到todoList列表中
+        this.todoList.push(this.info);
+        // 添加完毕后重新置为空
+        this.info = '';
+      } else {
+        alert('输入框不能为空');
+      }
+    },
+
+    deleteButtonClick() {
+      // this.todoList
+      if (this.todoList.length != 0) {
+        this.todoList.pop();
+      } else {
+        alert('不能再删除了');
+      }
+    },
+
+    resetButtonClick() {
+      // this.todoList || this.in
+      if (this.todoList.length != 0 || this.info) {
+        this.todoList = [];
+        this.info = '';
+      } else {
+        alert('不能再重置了');
+      }
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+
 </style>
