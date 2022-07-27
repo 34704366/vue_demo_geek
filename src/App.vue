@@ -22,6 +22,9 @@
       <!-- <to-do-item v-for="item,index in todoList" :key="index" :item="item"></to-do-item> -->
 
     </ul>
+    <div>
+      添加次数：{{pushCount}} {{$store.getters.doubleCount}}
+    </div>
   </div>
 </template>
 
@@ -40,6 +43,11 @@ export default {
       info: ''
     }
   },
+  computed: {
+    pushCount () {
+      return this.$store.state.pushCount;
+    }
+  },
   methods: {
     pushButtonClick() {
       // 如果this.info为空则不添加
@@ -48,6 +56,9 @@ export default {
         this.todoList.push(this.info);
         // 添加完毕后重新置为空
         this.info = '';
+
+        // 通过vuex状态管理来添加点击次数
+        this.$store.commit('pushOnce');
       } else {
         alert('输入框不能为空');
       }
