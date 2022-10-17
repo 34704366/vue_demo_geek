@@ -31,20 +31,22 @@
       <button type="button" @click="testButtonClick()">测试按钮</button>
       <button type="button" @click="allocateStorage()">数组内存分配按钮</button>
     </div>
-    <hello-world></hello-world>
+
+    <!-- 两种路由跳转的方式 -->
+    <router-link to="/hello">Show The Hello</router-link>
+    <button @click="$router.push('item')">Show The Item</button>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import ToDoItem from './components/ToDoItem'
-import HelloWorld from './components/HelloWorld.vue'
 
 
 export default {
   name: 'App',
   components: {
-    ToDoItem,
-    HelloWorld
+    ToDoItem
   },
   data() {
     return {

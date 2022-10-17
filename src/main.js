@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App.vue'
-import VueRouter from 'vue-router'
+import router from './router/index'
 
-Vue.config.productionTip = false
-Vue.use(Vuex)
+
+Vue.config.productionTip = false;
+Vue.use(Vuex);
 
 /*
   传参对于多层嵌套非常繁琐且不易管理，代码维护相当麻烦，
@@ -47,6 +48,7 @@ const store = new Vuex.Store({
 
 
 new Vue({
+  router,
   store,
   render: h => h(App),
 }).$mount('#app')
