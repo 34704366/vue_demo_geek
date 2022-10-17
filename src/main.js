@@ -18,11 +18,11 @@ const store = new Vuex.Store({
 
   // 调用时候用this.$store.commit("xxx函数")  来调用内部函数 
   mutations: {
-    pushOnce (state) {
+    pushOnce(state) {
       state.pushCount ++;
     },
 
-    pushAnyNumber (state, number) {
+    pushAnyNumber(state, number) {
       if (Number(number)) {
         state.pushCount += Math.floor(Number(number));
       }
@@ -38,7 +38,7 @@ const store = new Vuex.Store({
   },
   // 类似于computed，实现缓存
   getters: {
-    doubleCount (state) {
+    doubleCount(state) {
       return 2 * state.pushCount;
     }
   }
