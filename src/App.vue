@@ -31,23 +31,26 @@
       <button type="button" @click="testButtonClick()">测试按钮</button>
       <button type="button" @click="allocateStorage()">数组内存分配按钮</button>
     </div>
+    <hello-world></hello-world>
   </div>
 </template>
 
 <script>
 import ToDoItem from './components/ToDoItem'
+import HelloWorld from './components/HelloWorld.vue'
 
 
 export default {
   name: 'App',
   components: {
     ToDoItem,
+    HelloWorld
   },
   data() {
     return {
       todoList: ['hello'],
       info: '',
-      testStorage: [1,2,3],
+      testStorage: [1,2,3]
     }
   },
   computed: {
